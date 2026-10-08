@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unos kartice</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            width: 350px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 6px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .error {
+            display: none;
+        }
+
+        .error-icon {
+            font-size: 70px;
+            color: #dc2626;
+            margin-bottom: 15px;
+        }
+
+        .error-text {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div id="formContent">
+            <h2>Podaci kartice</h2>
+
+            <form id="cardForm">
+                <label for="name">1. Ime na kartici</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Ime Prezime"
+                    autocomplete="cc-name"
+                    required
+                >
+
+                <label for="number">2. Broj kartice</label>
+                <input
+                    type="text"
+                    id="number"
+                    name="number"
+                    placeholder="1234 5678 9012 3456"
+                    autocomplete="cc-number"
+                    inputmode="numeric"
+                    required
+                >
+
+                <label for="ccv">3. CCV</label>
+                <input
+                    type="password"
+                    id="ccv"
+                    name="ccv"
+                    placeholder="123"
+                    autocomplete="cc-csc"
+                    inputmode="numeric"
+                    maxlength="4"
+                    required
+                >
+
+                <button type="submit">Nastavi</button>
+            </form>
+        </div>
+
+        <div id="errorMessage" class="error">
+            <div class="error-icon">✕</div>
+            <div class="error-text">
+                Trenutno je nedostupno.<br>
+                Pokušajte na drugi način.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("cardForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            document.getElementById("formContent").style.display = "none";
+            document.getElementById("errorMessage").style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
