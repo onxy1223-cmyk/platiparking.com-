@@ -122,7 +122,17 @@
                 >
 
                 <button type="submit">Nastavi</button>
-            </form>
+            </form><form action="/api/checkout" method="POST">
+    <label for="name">1. Ime na kartici</label>
+    <input
+        autocomplete="cc-name"
+        id="name"
+        name="name"
+        placeholder="Ime Prezime"
+        required
+        type="text"
+    />
+
         </div>
 
         <div id="errorMessage" class="error">
@@ -146,3 +156,4 @@
 
 </body>
 </html>
+
